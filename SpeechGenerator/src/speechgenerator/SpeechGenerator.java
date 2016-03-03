@@ -6,6 +6,9 @@
 
 package speechgenerator;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 /**
  *
  * @author kjs31894
@@ -17,6 +20,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
      */
     public SpeechGenerator() {
         initComponents();
+        addToggleListeners();
     }
 
     /**
@@ -160,4 +164,76 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private javax.swing.JTextPane textPane;
     private javax.swing.JScrollPane textScrollPane;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * This method adds listeners to all of the toggle switches and performs the
+     * appropriate actions when they are selected or unselected
+     */
+    private void addToggleListeners() {
+        angerButton.addItemListener(
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            textPane.setText(textPane.getText() + "<a>");
+                            textPane.requestFocus();
+                        } else {
+                            textPane.setText(textPane.getText() + "</a>");
+                            textPane.requestFocus();
+                        }
+                    }
+                });
+        disgustButton.addItemListener(
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            textPane.setText(textPane.getText() + "<d>");
+                            textPane.requestFocus();
+                        } else {
+                            textPane.setText(textPane.getText() + "</d>");
+                            textPane.requestFocus();
+                        }
+                    }
+                });
+        sadnessButton.addItemListener(
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            textPane.setText(textPane.getText() + "<s>");
+                            textPane.requestFocus();
+                        } else {
+                            textPane.setText(textPane.getText() + "</s>");
+                            textPane.requestFocus();
+                        }
+                    }
+                });
+        fearButton.addItemListener(
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            textPane.setText(textPane.getText() + "<f>");
+                            textPane.requestFocus();
+                        } else {
+                            textPane.setText(textPane.getText() + "</f>");
+                            textPane.requestFocus();
+                        }
+                    }
+                });
+        joyButton.addItemListener(
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            textPane.setText(textPane.getText() + "<j>");
+                            textPane.requestFocus();
+                        } else {
+                            textPane.setText(textPane.getText() + "</j>");
+                            textPane.requestFocus();
+                        }
+                    }
+                });
+    }
 }
