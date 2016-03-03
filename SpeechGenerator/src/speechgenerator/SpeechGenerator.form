@@ -25,14 +25,25 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="textScrollPane" min="-2" pref="776" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="sadnessButton" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="angerButton" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="fearButton" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="disgustButton" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="joyButton" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="textScrollPane" min="-2" pref="776" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="outputButton" min="-2" pref="134" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="speakButton" min="-2" pref="134" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="joyButton" pref="130" max="32767" attributes="0"/>
+                  <Component id="sadnessButton" max="32767" attributes="0"/>
+                  <Component id="angerButton" pref="130" max="32767" attributes="0"/>
+                  <Component id="fearButton" pref="130" max="32767" attributes="0"/>
+                  <Component id="disgustButton" pref="130" max="32767" attributes="0"/>
+                  <Component id="divideButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -53,10 +64,17 @@
                       <Component id="disgustButton" min="-2" pref="101" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="joyButton" min="-2" pref="101" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="divideButton" min="-2" pref="100" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="textScrollPane" min="-2" pref="533" max="-2" attributes="0"/>
+                      <Component id="textScrollPane" min="-2" pref="556" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="outputButton" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="speakButton" alignment="3" min="-2" pref="100" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -98,5 +116,20 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="divideButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Divide"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="outputButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Send to File..."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="speakButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Speak"/>
+      </Properties>
+    </Component>
   </SubComponents>
 </Form>
