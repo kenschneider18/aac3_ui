@@ -175,10 +175,18 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
+                            disgustButton.setEnabled(false);
+                            fearButton.setEnabled(false);
+                            joyButton.setEnabled(false);
+                            sadnessButton.setEnabled(false);
                             textPane.setText(textPane.getText() + "<a>");
                             textPane.requestFocus();
                         } else {
                             textPane.setText(textPane.getText() + "</a>");
+                            disgustButton.setEnabled(true);
+                            fearButton.setEnabled(true);
+                            joyButton.setEnabled(true);
+                            sadnessButton.setEnabled(true);
                             textPane.requestFocus();
                         }
                     }
@@ -188,10 +196,18 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
+                            angerButton.setEnabled(false);
+                            fearButton.setEnabled(false);
+                            joyButton.setEnabled(false);
+                            sadnessButton.setEnabled(false);
                             textPane.setText(textPane.getText() + "<d>");
                             textPane.requestFocus();
                         } else {
                             textPane.setText(textPane.getText() + "</d>");
+                            angerButton.setEnabled(true);
+                            fearButton.setEnabled(true);
+                            joyButton.setEnabled(true);
+                            sadnessButton.setEnabled(true);
                             textPane.requestFocus();
                         }
                     }
@@ -201,10 +217,18 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
+                            disgustButton.setEnabled(false);
+                            fearButton.setEnabled(false);
+                            joyButton.setEnabled(false);
+                            angerButton.setEnabled(false);
                             textPane.setText(textPane.getText() + "<s>");
                             textPane.requestFocus();
                         } else {
                             textPane.setText(textPane.getText() + "</s>");
+                            disgustButton.setEnabled(true);
+                            fearButton.setEnabled(true);
+                            joyButton.setEnabled(true);
+                            angerButton.setEnabled(true);
                             textPane.requestFocus();
                         }
                     }
@@ -214,10 +238,18 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
+                            disgustButton.setEnabled(false);
+                            angerButton.setEnabled(false);
+                            joyButton.setEnabled(false);
+                            sadnessButton.setEnabled(false);
                             textPane.setText(textPane.getText() + "<f>");
                             textPane.requestFocus();
                         } else {
                             textPane.setText(textPane.getText() + "</f>");
+                            disgustButton.setEnabled(true);
+                            angerButton.setEnabled(true);
+                            joyButton.setEnabled(true);
+                            sadnessButton.setEnabled(true);
                             textPane.requestFocus();
                         }
                     }
@@ -227,10 +259,18 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
+                            disgustButton.setEnabled(false);
+                            fearButton.setEnabled(false);
+                            angerButton.setEnabled(false);
+                            sadnessButton.setEnabled(false);
                             textPane.setText(textPane.getText() + "<j>");
                             textPane.requestFocus();
                         } else {
                             textPane.setText(textPane.getText() + "</j>");
+                            disgustButton.setEnabled(true);
+                            fearButton.setEnabled(true);
+                            angerButton.setEnabled(true);
+                            sadnessButton.setEnabled(true);
                             textPane.requestFocus();
                         }
                     }
