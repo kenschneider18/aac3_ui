@@ -6,8 +6,16 @@
 
 package speechgenerator;
 
+import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 
 /**
  *
@@ -170,24 +178,57 @@ public class SpeechGenerator extends javax.swing.JFrame {
      * appropriate actions when they are selected or unselected
      */
     private void addToggleListeners() {
+        // Define text styles for tags to make them invisible within the
+        // jTextPane
+        Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+        StyledDocument document = textPane.getStyledDocument();
+        Style invisible = textPane.getStyledDocument().addStyle("invisible", regular);
+        Style angryHighlight = document.addStyle("angryHighlight", regular);
+        Style disgustHighlight = document.addStyle("disgustHighlight", regular);
+        Style sadHighlight = document.addStyle("sadHighlight", regular);
+        Style fearHighlight = document.addStyle("fearHighlight", regular);
+        Style joyHighlight = document.addStyle("joyHighlight", regular);
+        
+        // create invisible style
+        StyleConstants.setFontSize(invisible, 0);
+        StyleConstants.setForeground(invisible, textPane.getBackground());
+        
+        // create highlight styles
+        StyleConstants.setBackground(angryHighlight, Color.red);
+        StyleConstants.setBackground(disgustHighlight, Color.green);
+        StyleConstants.setBackground(sadHighlight, Color.cyan);
+        StyleConstants.setBackground(fearHighlight, Color.magenta);
+        StyleConstants.setBackground(joyHighlight, Color.pink);
+        
         angerButton.addItemListener(
                 new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
-                            disgustButton.setEnabled(false);
-                            fearButton.setEnabled(false);
-                            joyButton.setEnabled(false);
-                            sadnessButton.setEnabled(false);
-                            textPane.setText(textPane.getText() + "<a>");
-                            textPane.requestFocus();
+                            try {
+                                disgustButton.setEnabled(false);
+                                fearButton.setEnabled(false);
+                                joyButton.setEnabled(false);
+                                sadnessButton.setEnabled(false);
+                                // Test tag invisibility
+                                document.insertString(document.getLength(), "<a>", invisible);
+                                document.insertString(document.getLength(), " ", angryHighlight);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         } else {
-                            textPane.setText(textPane.getText() + "</a>");
-                            disgustButton.setEnabled(true);
-                            fearButton.setEnabled(true);
-                            joyButton.setEnabled(true);
-                            sadnessButton.setEnabled(true);
-                            textPane.requestFocus();
+                            try {
+                                document.insertString(document.getLength(), "</a>", invisible);
+                                document.insertString(document.getLength(), " ", regular);
+                                disgustButton.setEnabled(true);
+                                fearButton.setEnabled(true);
+                                joyButton.setEnabled(true);
+                                sadnessButton.setEnabled(true);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 });
@@ -196,19 +237,29 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
-                            angerButton.setEnabled(false);
-                            fearButton.setEnabled(false);
-                            joyButton.setEnabled(false);
-                            sadnessButton.setEnabled(false);
-                            textPane.setText(textPane.getText() + "<d>");
-                            textPane.requestFocus();
+                            try {
+                                angerButton.setEnabled(false);
+                                fearButton.setEnabled(false);
+                                joyButton.setEnabled(false);
+                                sadnessButton.setEnabled(false);
+                                document.insertString(document.getLength(), "<d>", invisible);
+                                document.insertString(document.getLength(), " ", disgustHighlight);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         } else {
-                            textPane.setText(textPane.getText() + "</d>");
-                            angerButton.setEnabled(true);
-                            fearButton.setEnabled(true);
-                            joyButton.setEnabled(true);
-                            sadnessButton.setEnabled(true);
-                            textPane.requestFocus();
+                            try {
+                                document.insertString(document.getLength(), "</d>", invisible);
+                                document.insertString(document.getLength(), " ", regular);
+                                angerButton.setEnabled(true);
+                                fearButton.setEnabled(true);
+                                joyButton.setEnabled(true);
+                                sadnessButton.setEnabled(true);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 });
@@ -218,19 +269,29 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
-                            disgustButton.setEnabled(false);
-                            fearButton.setEnabled(false);
-                            joyButton.setEnabled(false);
-                            angerButton.setEnabled(false);
-                            textPane.setText(textPane.getText() + "<s>");
-                            textPane.requestFocus();
+                            try {
+                                disgustButton.setEnabled(false);
+                                fearButton.setEnabled(false);
+                                joyButton.setEnabled(false);
+                                angerButton.setEnabled(false);
+                                document.insertString(document.getLength(), "<s>", invisible);
+                                document.insertString(document.getLength(), " ", sadHighlight);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         } else {
-                            textPane.setText(textPane.getText() + "</s>");
-                            disgustButton.setEnabled(true);
-                            fearButton.setEnabled(true);
-                            joyButton.setEnabled(true);
-                            angerButton.setEnabled(true);
-                            textPane.requestFocus();
+                            try {
+                                document.insertString(document.getLength(), "</s>", invisible);
+                                document.insertString(document.getLength(), " ", regular);
+                                disgustButton.setEnabled(true);
+                                fearButton.setEnabled(true);
+                                joyButton.setEnabled(true);
+                                angerButton.setEnabled(true);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 });
@@ -239,19 +300,29 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
-                            disgustButton.setEnabled(false);
-                            angerButton.setEnabled(false);
-                            joyButton.setEnabled(false);
-                            sadnessButton.setEnabled(false);
-                            textPane.setText(textPane.getText() + "<f>");
-                            textPane.requestFocus();
+                            try {
+                                disgustButton.setEnabled(false);
+                                angerButton.setEnabled(false);
+                                joyButton.setEnabled(false);
+                                sadnessButton.setEnabled(false);
+                                document.insertString(document.getLength(), "<f>", invisible);
+                                document.insertString(document.getLength(), " ", fearHighlight);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         } else {
-                            textPane.setText(textPane.getText() + "</f>");
-                            disgustButton.setEnabled(true);
-                            angerButton.setEnabled(true);
-                            joyButton.setEnabled(true);
-                            sadnessButton.setEnabled(true);
-                            textPane.requestFocus();
+                            try {
+                                document.insertString(document.getLength(), "</f>", invisible);
+                                document.insertString(document.getLength(), " ", regular);
+                                disgustButton.setEnabled(true);
+                                angerButton.setEnabled(true);
+                                joyButton.setEnabled(true);
+                                sadnessButton.setEnabled(true);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 });
@@ -260,19 +331,29 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
                         if (e.getStateChange() == ItemEvent.SELECTED) {
-                            disgustButton.setEnabled(false);
-                            fearButton.setEnabled(false);
-                            angerButton.setEnabled(false);
-                            sadnessButton.setEnabled(false);
-                            textPane.setText(textPane.getText() + "<j>");
-                            textPane.requestFocus();
+                            try {
+                                disgustButton.setEnabled(false);
+                                fearButton.setEnabled(false);
+                                angerButton.setEnabled(false);
+                                sadnessButton.setEnabled(false);
+                                document.insertString(document.getLength(), "<j>", invisible);
+                                document.insertString(document.getLength(), " ", joyHighlight);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         } else {
-                            textPane.setText(textPane.getText() + "</j>");
-                            disgustButton.setEnabled(true);
-                            fearButton.setEnabled(true);
-                            angerButton.setEnabled(true);
-                            sadnessButton.setEnabled(true);
-                            textPane.requestFocus();
+                            try {
+                                document.insertString(document.getLength(), "</j>", invisible);
+                                document.insertString(document.getLength(), " ", regular);
+                                disgustButton.setEnabled(true);
+                                fearButton.setEnabled(true);
+                                angerButton.setEnabled(true);
+                                sadnessButton.setEnabled(true);
+                                textPane.requestFocus();
+                            } catch (BadLocationException ex) {
+                                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                            }
                         }
                     }
                 });
