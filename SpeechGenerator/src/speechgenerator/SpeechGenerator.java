@@ -9,6 +9,10 @@ package speechgenerator;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.text.BadLocationException;
@@ -73,6 +77,11 @@ public class SpeechGenerator extends javax.swing.JFrame {
         });
 
         outputButton.setText("Send to File...");
+        outputButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outputButtonActionPerformed(evt);
+            }
+        });
 
         speakButton.setText("Speak");
 
@@ -129,6 +138,28 @@ public class SpeechGenerator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void outputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputButtonActionPerformed
+        // TODO add your handling code here:
+        try{
+            String text = textPane.getText();
+            File file = new File("thisfile.txt");
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(text);
+            bw.close();
+            
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        
+        }
+        
+        
+    }//GEN-LAST:event_outputButtonActionPerformed
 
     private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
         try {
