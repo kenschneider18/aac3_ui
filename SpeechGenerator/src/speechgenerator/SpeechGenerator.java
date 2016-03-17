@@ -66,6 +66,11 @@ public class SpeechGenerator extends javax.swing.JFrame {
         textScrollPane.setViewportView(textPane);
 
         divideButton.setText("Divide");
+        divideButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                divideButtonActionPerformed(evt);
+            }
+        });
 
         outputButton.setText("Send to File...");
 
@@ -124,6 +129,21 @@ public class SpeechGenerator extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
+        try {
+            Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+            StyledDocument document = textPane.getStyledDocument();
+            //Style invisible = textPane.getStyledDocument().addStyle("invisible", regular);
+            //StyleConstants.setFontSize(invisible, 0);
+            //StyleConstants.setForeground(invisible, textPane.getBackground());
+            
+            document.insertString(document.getLength(), "<div>", document.getStyle("invisible"));
+            document.insertString(document.getLength(), " ", regular);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_divideButtonActionPerformed
 
     /**
      * @param args the command line arguments
