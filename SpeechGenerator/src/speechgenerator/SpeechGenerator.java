@@ -134,15 +134,13 @@ public class SpeechGenerator extends javax.swing.JFrame {
         try {
             Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
             StyledDocument document = textPane.getStyledDocument();
-            //Style invisible = textPane.getStyledDocument().addStyle("invisible", regular);
-            //StyleConstants.setFontSize(invisible, 0);
-            //StyleConstants.setForeground(invisible, textPane.getBackground());
             
             document.insertString(document.getLength(), "<div>", document.getStyle("invisible"));
             document.insertString(document.getLength(), " ", regular);
         } catch (BadLocationException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
+        textPane.requestFocus();
     }//GEN-LAST:event_divideButtonActionPerformed
 
     /**
