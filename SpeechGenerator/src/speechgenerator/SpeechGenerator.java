@@ -142,23 +142,24 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private void outputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputButtonActionPerformed
         // TODO add your handling code here:
         try{
-            String text = textPane.getText();
-            File file = new File("thisfile.txt");
-            if(!file.exists()){
-                file.createNewFile();
-            }
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(text);
-            bw.close();
+            //String text = textPane.getText();
+            String[] outputStrings = textPane.getText().split("<div>");
             
+            // Counter to modify out file names
+            int i=1;
+            for (String s : outputStrings) {
+                File file = new File("text" + i + ".txt");
+                file.createNewFile();
+                FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+                bw.write(s);
+                bw.close();
+                i++;
+            }
         }
         catch(IOException e){
             e.printStackTrace();
-        
-        }
-        
-        
+        }  
     }//GEN-LAST:event_outputButtonActionPerformed
 
     private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
