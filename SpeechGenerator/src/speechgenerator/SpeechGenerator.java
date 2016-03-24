@@ -37,6 +37,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
      */
     public SpeechGenerator() {
         initComponents();
+        initStyles();
         addToggleListeners();
     }
 
@@ -180,10 +181,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
 
     private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
         try {
-            Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-            StyledDocument document = textPane.getStyledDocument();
-            
-            document.insertString(document.getLength(), "<div>", document.getStyle("invisible"));
+            document.insertString(document.getLength(), "<div>", invisible);
             document.insertString(document.getLength(), " ", regular);
         } catch (BadLocationException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -258,6 +256,44 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private javax.swing.JScrollPane textScrollPane;
     // End of variables declaration//GEN-END:variables
 
+    // Global variables for the styles so that
+    // they must only be defined one, but may be used in multiple places
+    private final Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+    private StyledDocument document;
+    private Style invisible;
+    private Style angryHighlight;
+    private Style disgustHighlight;
+    private Style sadHighlight;
+    private Style fearHighlight;
+    private Style joyHighlight;
+    
+    /**
+     * This method takes the globally defined document style variables
+     * and intializes the styles. The fucntion will be called by main
+     * before any stylization code is called.
+     */
+    private void initStyles() {
+        document = textPane.getStyledDocument();
+        
+        invisible = textPane.getStyledDocument().addStyle("invisible", regular);
+        angryHighlight = document.addStyle("angryHighlight", regular);
+        disgustHighlight = document.addStyle("disgustHighlight", regular);
+        sadHighlight = document.addStyle("sadHighlight", regular);
+        fearHighlight = document.addStyle("fearHighlight", regular);
+        joyHighlight = document.addStyle("joyHighlight", regular);
+        
+        // create invisible style
+        StyleConstants.setFontSize(invisible, 0);
+        StyleConstants.setForeground(invisible, textPane.getBackground());
+
+        // create highlight styles
+        StyleConstants.setBackground(angryHighlight, Color.red);
+        StyleConstants.setBackground(disgustHighlight, Color.green);
+        StyleConstants.setBackground(sadHighlight, Color.cyan);
+        StyleConstants.setBackground(fearHighlight, Color.magenta);
+        StyleConstants.setBackground(joyHighlight, Color.pink);
+        }
+    
     /**
      * This method adds listeners to all of the toggle switches and performs the
      * appropriate actions when they are selected or unselected
@@ -265,17 +301,17 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private void addToggleListeners() {
         // Define text styles for tags to make them invisible within the
         // jTextPane
-        Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+        /*Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
         StyledDocument document = textPane.getStyledDocument();
         Style invisible = textPane.getStyledDocument().addStyle("invisible", regular);
         Style angryHighlight = document.addStyle("angryHighlight", regular);
         Style disgustHighlight = document.addStyle("disgustHighlight", regular);
         Style sadHighlight = document.addStyle("sadHighlight", regular);
         Style fearHighlight = document.addStyle("fearHighlight", regular);
-        Style joyHighlight = document.addStyle("joyHighlight", regular);
+        Style joyHighlight = document.addStyle("joyHighlight", regular);*/
         
         // create invisible style
-        StyleConstants.setFontSize(invisible, 0);
+        /*StyleConstants.setFontSize(invisible, 0);
         StyleConstants.setForeground(invisible, textPane.getBackground());
         
         // create highlight styles
@@ -283,7 +319,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
         StyleConstants.setBackground(disgustHighlight, Color.green);
         StyleConstants.setBackground(sadHighlight, Color.cyan);
         StyleConstants.setBackground(fearHighlight, Color.magenta);
-        StyleConstants.setBackground(joyHighlight, Color.pink);
+        StyleConstants.setBackground(joyHighlight, Color.pink);*/
         
         angerButton.addItemListener(
                 new ItemListener() {
