@@ -298,29 +298,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
      * This method adds listeners to all of the toggle switches and performs the
      * appropriate actions when they are selected or unselected
      */
-    private void addToggleListeners() {
-        // Define text styles for tags to make them invisible within the
-        // jTextPane
-        /*Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-        StyledDocument document = textPane.getStyledDocument();
-        Style invisible = textPane.getStyledDocument().addStyle("invisible", regular);
-        Style angryHighlight = document.addStyle("angryHighlight", regular);
-        Style disgustHighlight = document.addStyle("disgustHighlight", regular);
-        Style sadHighlight = document.addStyle("sadHighlight", regular);
-        Style fearHighlight = document.addStyle("fearHighlight", regular);
-        Style joyHighlight = document.addStyle("joyHighlight", regular);*/
-        
-        // create invisible style
-        /*StyleConstants.setFontSize(invisible, 0);
-        StyleConstants.setForeground(invisible, textPane.getBackground());
-        
-        // create highlight styles
-        StyleConstants.setBackground(angryHighlight, Color.red);
-        StyleConstants.setBackground(disgustHighlight, Color.green);
-        StyleConstants.setBackground(sadHighlight, Color.cyan);
-        StyleConstants.setBackground(fearHighlight, Color.magenta);
-        StyleConstants.setBackground(joyHighlight, Color.pink);*/
-        
+    private void addToggleListeners() {        
         angerButton.addItemListener(
                 new ItemListener() {
                     @Override
