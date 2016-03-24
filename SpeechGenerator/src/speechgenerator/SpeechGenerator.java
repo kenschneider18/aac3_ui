@@ -457,4 +457,51 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     }
                 });
     }
+    
+    /**
+     * Function takes in a text file chosen with a button
+     * then stylizes the text and displays it in the main
+     * text panel.
+     * @param textFile 
+     */
+    private void parseTextFile(String textFile) {
+        String startTags[] = {"<a>", "<s>", "<f>", "<d>", "<j>"};
+        String endTags[] = {"</a>", "</s>", "</f>", "</d>", "</j>"};
+        Style highlights[] = {angryHighlight, sadHighlight, fearHighlight, disgustHighlight, joyHighlight};
+        
+        // Clear out the text in the text pane
+        textPane.setText("");
+        
+        for (String tag : startTags) {
+            // iterate over endTags and highlights based
+            // on which start tag is selected
+            int i = 0;
+            int beginIndex = 0;
+            int lastIndex = 0;
+            int endTagIndex = -1;
+            while (lastIndex != -1) {
+                try {
+                    lastIndex = textFile.indexOf(tag, lastIndex);
+                    
+                    // Insert everything in between tags
+                    document.insertString(document.getLength(), textFile.substring(beginIndex, lastIndex), regular);
+                    
+                    // Insert start tag
+                    document.insertString(document.getLength(), textFile.substring(lastIndex, lastIndex+tag.length()), invisible);
+                    
+                    // Insert highlighted text
+                    lastIndex += tag.length();
+                    endTagIndex = textFile.indexOf(endTags[i], lastIndex);
+                    document.insertString(document.getLength(), textFile.substring(lastIndex, endTagIndex), highlights[i]);
+                    
+                    // Insert end tag
+                    
+                    beginIndex = lastIndex;
+                    i++;
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
 }
