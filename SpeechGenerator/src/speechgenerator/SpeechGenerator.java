@@ -242,6 +242,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
         StyleConstants.setFontSize(invisible, 0);
         StyleConstants.setForeground(invisible, textPane.getBackground());
         
+        // test change for aaron
+        
         // create highlight styles
         StyleConstants.setBackground(angryHighlight, Color.red);
         StyleConstants.setBackground(disgustHighlight, Color.green);
