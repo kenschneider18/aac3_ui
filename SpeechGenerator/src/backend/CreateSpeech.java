@@ -21,10 +21,11 @@ import javax.sound.sampled.AudioFileFormat.Type;
 public class CreateSpeech {
     
     public static void convertText(String text){
+         text = text+ " <end>";
          ArrayList textList = new ArrayList();
          ArrayList emotionList = new ArrayList();
          String list[] = text.split(" ");        
-         for (int i = 0; i < list.length; i++){
+         for (int i = 0; i < list.length-1; i++){
              if(list[i].equals("<a>") || list[i].equals("<f>") || list[i].equals("<d>") || list[i].equals("<s>") || list[i].equals("<j>")){
                  emotionList.add(list[i]);
                  String line = "";
@@ -32,10 +33,12 @@ public class CreateSpeech {
                      line += list[i] + " ";
                  textList.add(line);
              }
+             else if(list[i].equals("")); 
+             
              else{
                  emotionList.add("None");
                  String line = "";
-                 for (i = i; !list[i].startsWith("<"); i++)
+                 for (i = i; !list[i].startsWith("<") && !list[i].equals("<end>"); i++)
                      line += list[i] + " ";
                  textList.add(line);
                  i--;
