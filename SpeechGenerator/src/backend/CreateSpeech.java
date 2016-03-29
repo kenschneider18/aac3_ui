@@ -6,18 +6,18 @@
 package backend;
 
 import java.util.ArrayList;
-import com.sun.speech.freetts.FreeTTS;
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
-import com.sun.speech.freetts.audio.AudioPlayer;
-import com.sun.speech.freetts.audio.SingleFileAudioPlayer;
-import javax.sound.sampled.AudioFileFormat.Type;
+//import com.sun.speech.freetts.FreeTTS;
+//import com.sun.speech.freetts.Voice;
+//import com.sun.speech.freetts.VoiceManager;
+//import com.sun.speech.freetts.audio.AudioPlayer;
+//import com.sun.speech.freetts.audio.SingleFileAudioPlayer;
+//import javax.sound.sampled.AudioFileFormat.Type;
 
 /**
  *
  * @author aaron
  */
-public class createSpeech {
+public class CreateSpeech {
     
     public void convertText(String text){
          ArrayList textList = new ArrayList();
