@@ -3,3 +3,4 @@ SpeechGenerator/text2.txt
 SpeechGenerator/build/
 SpeechGenerator/nbproject/private/
 SpeechGenerator/thisfile.txt
+SpeechGenerator/*.wav
