@@ -18,9 +18,9 @@ import javax.sound.sampled.AudioFileFormat.Type;
  *
  * @author aaron
  */
-public class createSpeech {
+public class CreateSpeech {
     
-    public void convertText(String text){
+    public static void convertText(String text){
          ArrayList textList = new ArrayList();
          ArrayList emotionList = new ArrayList();
          String list[] = text.split(" ");        
@@ -48,7 +48,7 @@ public class createSpeech {
          
     }
    
-        static void convertSpeech(String text, String emotion, String name){
+    private static void convertSpeech(String text, String emotion, String name){
         
         FreeTTS freetts;
         AudioPlayer audioPlayer = null;
