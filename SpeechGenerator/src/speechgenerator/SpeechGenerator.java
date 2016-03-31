@@ -26,6 +26,8 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 import backend.CreateSpeech;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -215,7 +217,15 @@ public class SpeechGenerator extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseFileButtonActionPerformed
 
     private void speakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakButtonActionPerformed
-        CreateSpeech.convertText(textPane.getText());
+        try {
+            CreateSpeech.convertText(textPane.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_speakButtonActionPerformed
 
     /**
