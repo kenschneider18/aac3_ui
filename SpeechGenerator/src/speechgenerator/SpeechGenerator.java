@@ -175,14 +175,26 @@ public class SpeechGenerator extends javax.swing.JFrame {
             String[] outputStrings = textPane.getText().split("<div>");
             
             // Counter to modify out file names
-            int i=1;
-            for (String s : outputStrings) {
+            //int i=1;
+            /*for (String s : outputStrings) {
                 File file = new File("text" + i + ".txt");
                 file.createNewFile();
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
                 bw.write(s);
                 bw.close();
+                i++;
+            } */
+            int i = 1;
+            for (String s : outputStrings) {
+                String name = "output" + i;
+                try {
+                    CreateSpeech.convertText(s, name, false);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (LineUnavailableException ex) {
+                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 i++;
             }
         }
