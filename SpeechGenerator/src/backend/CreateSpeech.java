@@ -34,9 +34,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class CreateSpeech {
     
     private static String outputName;
+    private static Boolean speak;
     
-    public static void convertText(String text, String name) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+    public static void convertText(String text, String name, Boolean speakFlag) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
          text = text+ " <end>";
+         speak = speakFlag;
          outputName = name + ".wav";
          ArrayList textList = new ArrayList();
          ArrayList emotionList = new ArrayList();
@@ -68,7 +70,8 @@ public class CreateSpeech {
          }
          
         combineWav(paths);
-        playSound(outputName);
+        if (speak)
+            playSound(outputName);
 
 //         System.gc();
 //        for(int i = 0; i < paths.size(); i++)

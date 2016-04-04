@@ -219,7 +219,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
 
     private void speakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakButtonActionPerformed
         try {
-            CreateSpeech.convertText(textPane.getText(), "VoiceOutput");
+            CreateSpeech.convertText(textPane.getText(), "VoiceOutput", true);
         } catch (IOException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedAudioFileException ex) {
