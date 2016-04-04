@@ -21,8 +21,8 @@ import javax.sound.sampled.AudioFileFormat.Type;
 public class CreateSpeech {
     
     public static void convertText(String text){
-         ArrayList textList = new ArrayList();
-         ArrayList emotionList = new ArrayList();
+         ArrayList<String> textList = new ArrayList<>();
+         ArrayList<String> emotionList = new ArrayList<>();
          String list[] = text.split(" ");        
          for (int i = 0; i < list.length; i++){
              if(list[i].equals("<a>") || list[i].equals("<f>") || list[i].equals("<d>") || list[i].equals("<s>") || list[i].equals("<j>")){
@@ -43,9 +43,7 @@ public class CreateSpeech {
          }
          
          for (int i = 0; i < textList.size(); i++)
-            convertSpeech(textList.get(i).toString(), emotionList.get(i).toString(), "VoicePt"+i);
-         
-         
+            convertSpeech(textList.get(i), emotionList.get(i), "VoicePt"+i);       
     }
    
     private static void convertSpeech(String text, String emotion, String name){
