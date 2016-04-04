@@ -189,6 +189,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private void divideButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divideButtonActionPerformed
         try {
             document.insertString(document.getLength(), "<div>", invisible);
+            document.insertString(document.getLength(), " ", black);
             document.insertString(document.getLength(), " ", regular);
         } catch (BadLocationException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -277,6 +278,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private Style sadHighlight;
     private Style fearHighlight;
     private Style joyHighlight;
+    private Style black;
     
     /**
      * This method takes the globally defined document style variables
@@ -292,6 +294,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
         sadHighlight = document.addStyle("sadHighlight", regular);
         fearHighlight = document.addStyle("fearHighlight", regular);
         joyHighlight = document.addStyle("joyHighlight", regular);
+        black = document.addStyle("black", regular);
         
         // create invisible style
         StyleConstants.setFontSize(invisible, 0);
@@ -303,6 +306,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
         StyleConstants.setBackground(sadHighlight, Color.cyan);
         StyleConstants.setBackground(fearHighlight, Color.magenta);
         StyleConstants.setBackground(joyHighlight, Color.pink);
+        StyleConstants.setBackground(black, Color.black);
         }
     
     /**
