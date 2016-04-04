@@ -324,6 +324,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 // Test tag invisibility
                                 document.insertString(document.getLength(), " <a>", invisible);
                                 document.insertString(document.getLength(), " ", angryHighlight);
@@ -339,6 +343,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -356,6 +364,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <d>", invisible);
                                 document.insertString(document.getLength(), " ", disgustHighlight);
                                 textPane.requestFocus();
@@ -370,6 +382,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -388,6 +404,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 angerButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <s>", invisible);
                                 document.insertString(document.getLength(), " ", sadHighlight);
                                 textPane.requestFocus();
@@ -402,6 +422,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 angerButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -419,6 +443,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 angerButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <f>", invisible);
                                 document.insertString(document.getLength(), " ", fearHighlight);
                                 textPane.requestFocus();
@@ -433,6 +461,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 angerButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,6 +482,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 angerButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <j>", invisible);
                                 document.insertString(document.getLength(), " ", joyHighlight);
                                 textPane.requestFocus();
@@ -464,6 +500,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 angerButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
