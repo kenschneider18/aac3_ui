@@ -51,7 +51,7 @@ public class CreateSpeech {
                      line += list[i] + " ";
                  textList.add(line);
              }
-             else if(list[i].equals("")) {
+             else if(list[i].equals("") || list[i].equals("<div>")) {
              }       
              else{
                  emotionList.add("None");
