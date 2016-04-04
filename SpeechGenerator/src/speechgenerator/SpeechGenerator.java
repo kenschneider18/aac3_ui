@@ -6,16 +6,13 @@
 
 package speechgenerator;
 
-import backend.CreateSpeech;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -171,23 +168,11 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private void outputButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputButtonActionPerformed
         // TODO add your handling code here:
         try{
-            //String text = textPane.getText();
             String[] outputStrings = textPane.getText().split("<div>");
-            
-            // Counter to modify out file names
-            //int i=1;
-            /*for (String s : outputStrings) {
-                File file = new File("text" + i + ".txt");
-                file.createNewFile();
-                FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                BufferedWriter bw = new BufferedWriter(fw);
-                bw.write(s);
-                bw.close();
-                i++;
-            } */
+
             int i = 1;
             for (String s : outputStrings) {
-                String name = "output" + i;
+                String name = "file" + i;
                 try {
                     CreateSpeech.convertText(s, name, false);
                 } catch (UnsupportedAudioFileException ex) {
@@ -559,13 +544,13 @@ public class SpeechGenerator extends javax.swing.JFrame {
             if(list[i].equals("<a>") || list[i].equals("<f>") || list[i].equals("<d>") || list[i].equals("<s>") || list[i].equals("<j>")){
                 emotionList.add(list[i]);
                 String line = "";
-                //if (!list[i].equals("<div>")) {
                     for (i = i+1; !list[i].startsWith("</"); i++)
                         line += list[i] + " ";
-                /*} else {
-                    line = " ";
-                }*/
                 textList.add(line);
+            }
+            else if (list[i].equals("<div>")) {
+                emotionList.add(list[i]);
+                textList.add(" ");
             }
             else{
                 emotionList.add("None");
@@ -600,13 +585,18 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     document.insertString(document.getLength(), emotionList.get(i), invisible);
                 }
                 document.insertString(document.getLength(), " " + s, emotionMap.get(emotionList.get(i)));
-                if (!"None".equals(emotionList.get(i))) {
+                if (!"None".equals(emotionList.get(i)) && !"<div>".equals(emotionList.get(i))) {
                     document.insertString(document.getLength(), tagMap.get(emotionList.get(i)) + " ", invisible);
                 }
                 i++;
             } catch (BadLocationException ex) {
                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        try {
+            document.insertString(document.getLength(), " ", regular);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

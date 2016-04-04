@@ -112,7 +112,12 @@ public class CreateSpeech {
         // Synthesize speech.
 
         //create a audioplayer to dump the output file
-        audioPlayer = new SingleFileAudioPlayer(System.getProperty("user.dir")+"\\" + name,AudioFileFormat.Type.WAVE);
+        System.out.println(System.getProperty("os.name"));
+        if ("Mac OS X".equals(System.getProperty("os.name"))) {
+            audioPlayer = new SingleFileAudioPlayer(System.getProperty("user.dir")+ "/" + name,AudioFileFormat.Type.WAVE);
+        } else {
+            audioPlayer = new SingleFileAudioPlayer(System.getProperty("user.dir")+"\\" + name,AudioFileFormat.Type.WAVE);
+        }
         //attach the audioplayer 
         speechVoice.setAudioPlayer(audioPlayer);
         speechVoice.speak(text);
