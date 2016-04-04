@@ -33,8 +33,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  */
 public class CreateSpeech {
     
-    public static void convertText(String text) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+    private static String outputName;
+    
+    public static void convertText(String text, String name) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
          text = text+ " <end>";
+         outputName = name + ".wav";
          ArrayList textList = new ArrayList();
          ArrayList emotionList = new ArrayList();
          String list[] = text.split(" ");        
@@ -65,14 +68,13 @@ public class CreateSpeech {
          }
          
         combineWav(paths);
-        playSound("combined.wav");
-       
-//        System.gc();
-//        for(int i = 0; i < paths.size(); i++){ 
-//            File file = new File(paths.get(i).toString());
-//            Path path = FileSystems.getDefault().getPath(paths.get(i).toString());
-//            Files.delete(path);
-//        }
+        playSound(outputName);
+
+//         System.gc();
+//        for(int i = 0; i < paths.size(); i++)
+//            Files.delete(FileSystems.getDefault().getPath(paths.get(i).toString()));
+//                   
+//        Files.delete(FileSystems.getDefault().getPath(outputName));
          
     }
    
@@ -140,7 +142,7 @@ public class CreateSpeech {
             
             
         }
-        AudioSystem.write(clip1, AudioFileFormat.Type.WAVE, new File("combined.wav"));
+        AudioSystem.write(clip1, AudioFileFormat.Type.WAVE, new File(outputName));
         
         
        
