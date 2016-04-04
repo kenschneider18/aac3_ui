@@ -6,6 +6,7 @@
 
 package speechgenerator;
 
+import backend.CreateSpeech;
 import java.awt.Color;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -16,6 +17,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -26,6 +29,8 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 import backend.CreateSpeech;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -170,14 +175,26 @@ public class SpeechGenerator extends javax.swing.JFrame {
             String[] outputStrings = textPane.getText().split("<div>");
             
             // Counter to modify out file names
-            int i=1;
-            for (String s : outputStrings) {
+            //int i=1;
+            /*for (String s : outputStrings) {
                 File file = new File("text" + i + ".txt");
                 file.createNewFile();
                 FileWriter fw = new FileWriter(file.getAbsoluteFile());
                 BufferedWriter bw = new BufferedWriter(fw);
                 bw.write(s);
                 bw.close();
+                i++;
+            } */
+            int i = 1;
+            for (String s : outputStrings) {
+                String name = "output" + i;
+                try {
+                    CreateSpeech.convertText(s, name, false);
+                } catch (UnsupportedAudioFileException ex) {
+                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (LineUnavailableException ex) {
+                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 i++;
             }
         }
@@ -207,7 +224,14 @@ public class SpeechGenerator extends javax.swing.JFrame {
         try {
             FileReader fr = new FileReader(inputFile);
             BufferedReader br = new BufferedReader(fr);
-            textPane.read(br, "textPane");
+            //textPane.read(br, "textPane");
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+            String textFile = sb.toString();
+            parseTextFile(textFile);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -216,7 +240,15 @@ public class SpeechGenerator extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseFileButtonActionPerformed
 
     private void speakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakButtonActionPerformed
-        CreateSpeech.convertText(textPane.getText());
+        try {
+            CreateSpeech.convertText(textPane.getText(), "VoiceOutput", true);
+        } catch (IOException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_speakButtonActionPerformed
 
     /**
@@ -324,6 +356,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 // Test tag invisibility
                                 document.insertString(document.getLength(), " <a>", invisible);
                                 document.insertString(document.getLength(), " ", angryHighlight);
@@ -339,6 +375,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -356,6 +396,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <d>", invisible);
                                 document.insertString(document.getLength(), " ", disgustHighlight);
                                 textPane.requestFocus();
@@ -370,6 +414,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -388,6 +436,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 angerButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <s>", invisible);
                                 document.insertString(document.getLength(), " ", sadHighlight);
                                 textPane.requestFocus();
@@ -402,6 +454,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 angerButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -419,6 +475,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 angerButton.setEnabled(false);
                                 joyButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <f>", invisible);
                                 document.insertString(document.getLength(), " ", fearHighlight);
                                 textPane.requestFocus();
@@ -433,6 +493,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 angerButton.setEnabled(true);
                                 joyButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -450,6 +514,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(false);
                                 angerButton.setEnabled(false);
                                 sadnessButton.setEnabled(false);
+                                divideButton.setEnabled(false);
+                                speakButton.setEnabled(false);
+                                outputButton.setEnabled(false);
+                                chooseFileButton.setEnabled(false);
                                 document.insertString(document.getLength(), " <j>", invisible);
                                 document.insertString(document.getLength(), " ", joyHighlight);
                                 textPane.requestFocus();
@@ -464,6 +532,10 @@ public class SpeechGenerator extends javax.swing.JFrame {
                                 fearButton.setEnabled(true);
                                 angerButton.setEnabled(true);
                                 sadnessButton.setEnabled(true);
+                                divideButton.setEnabled(true);
+                                speakButton.setEnabled(true);
+                                outputButton.setEnabled(true);
+                                chooseFileButton.setEnabled(true);
                                 textPane.requestFocus();
                             } catch (BadLocationException ex) {
                                 Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
@@ -480,42 +552,60 @@ public class SpeechGenerator extends javax.swing.JFrame {
      * @param textFile 
      */
     private void parseTextFile(String textFile) {
-        String startTags[] = {"<a>", "<s>", "<f>", "<d>", "<j>"};
-        String endTags[] = {"</a>", "</s>", "</f>", "</d>", "</j>"};
-        Style highlights[] = {angryHighlight, sadHighlight, fearHighlight, disgustHighlight, joyHighlight};
+        ArrayList<String> textList = new ArrayList<>();
+        ArrayList<String> emotionList = new ArrayList<>();
+        String list[] = textFile.split(" ");        
+        for (int i = 0; i < list.length; i++){
+            if(list[i].equals("<a>") || list[i].equals("<f>") || list[i].equals("<d>") || list[i].equals("<s>") || list[i].equals("<j>")){
+                emotionList.add(list[i]);
+                String line = "";
+                //if (!list[i].equals("<div>")) {
+                    for (i = i+1; !list[i].startsWith("</"); i++)
+                        line += list[i] + " ";
+                /*} else {
+                    line = " ";
+                }*/
+                textList.add(line);
+            }
+            else{
+                emotionList.add("None");
+                String line = "";
+                for (i = i; !list[i].startsWith("<"); i++)
+                    line += list[i] + " ";
+                textList.add(line);
+                i--;
+            }
+        }
         
-        // Clear out the text in the text pane
-        textPane.setText("");
+        HashMap<String, Style> emotionMap = new HashMap<>();
+        emotionMap.put("<a>", angryHighlight);
+        emotionMap.put("<f>", fearHighlight);
+        emotionMap.put("<d>", disgustHighlight);
+        emotionMap.put("<s>", sadHighlight);
+        emotionMap.put("<j>", joyHighlight);
+        emotionMap.put("<div>", black);
+        emotionMap.put("None", regular);
         
-        for (String tag : startTags) {
-            // iterate over endTags and highlights based
-            // on which start tag is selected
-            int i = 0;
-            int beginIndex = 0;
-            int lastIndex = 0;
-            int endTagIndex = -1;
-            while (lastIndex != -1) {
-                try {
-                    lastIndex = textFile.indexOf(tag, lastIndex);
-                    
-                    // Insert everything in between tags
-                    document.insertString(document.getLength(), textFile.substring(beginIndex, lastIndex), regular);
-                    
-                    // Insert start tag
-                    document.insertString(document.getLength(), textFile.substring(lastIndex, lastIndex+tag.length()), invisible);
-                    
-                    // Insert highlighted text
-                    lastIndex += tag.length();
-                    endTagIndex = textFile.indexOf(endTags[i], lastIndex);
-                    document.insertString(document.getLength(), textFile.substring(lastIndex, endTagIndex), highlights[i]);
-                    
-                    // Insert end tag
-                    
-                    beginIndex = lastIndex;
-                    i++;
-                } catch (BadLocationException ex) {
-                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        HashMap<String, String> tagMap = new HashMap<>();
+        tagMap.put("<a>", "</a>");
+        tagMap.put("<f>", "</f>");
+        tagMap.put("<d>", "</d>");
+        tagMap.put("<s>", "</s>");
+        tagMap.put("<j>", "</j>");
+        
+        int i = 0;
+        for (String s : textList) {
+            try {
+                if (!"None".equals(emotionList.get(i))) {
+                    document.insertString(document.getLength(), emotionList.get(i), invisible);
                 }
+                document.insertString(document.getLength(), " " + s, emotionMap.get(emotionList.get(i)));
+                if (!"None".equals(emotionList.get(i))) {
+                    document.insertString(document.getLength(), tagMap.get(emotionList.get(i)) + " ", invisible);
+                }
+                i++;
+            } catch (BadLocationException ex) {
+                Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
