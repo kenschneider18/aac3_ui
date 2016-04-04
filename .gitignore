@@ -1,5 +1,8 @@
-SpeechGenerator/text1.txt
-SpeechGenerator/text2.txt
+SpeechGenerator/*.txt
+SpeechGenerator\\*.txt
 SpeechGenerator/build/
 SpeechGenerator/nbproject/private/
 SpeechGenerator/thisfile.txt
+SpeechGenerator/*.wav
+SpeechGenerator\\*.wav
+.DS_Store

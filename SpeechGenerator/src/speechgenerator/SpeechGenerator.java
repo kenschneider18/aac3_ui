@@ -216,8 +216,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseFileButtonActionPerformed
 
     private void speakButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_speakButtonActionPerformed
-        CreateSpeech cspeech = new CreateSpeech();
-        cspeech.convertText(textPane.getText());
+        CreateSpeech.convertText(textPane.getText());
     }//GEN-LAST:event_speakButtonActionPerformed
 
     /**
