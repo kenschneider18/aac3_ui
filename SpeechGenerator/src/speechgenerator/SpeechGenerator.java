@@ -42,6 +42,7 @@ public class SpeechGenerator extends javax.swing.JFrame {
     public SpeechGenerator() {
         initComponents();
         initStyles();
+        initButtons();
         addToggleListeners();
     }
 
@@ -287,7 +288,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
 
     // Global variables for the styles so that
     // they must only be defined one, but may be used in multiple places
-    private final Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+    //private final Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
+    private Style regular = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
     private StyledDocument document;
     private Style invisible;
     private Style angryHighlight;
@@ -325,6 +327,14 @@ public class SpeechGenerator extends javax.swing.JFrame {
         StyleConstants.setBackground(joyHighlight, Color.pink);
         StyleConstants.setBackground(black, Color.black);
         }
+    
+    private void initButtons() {
+        joyButton.setBackground(Color.pink);
+        angerButton.setBackground(Color.red);
+        sadnessButton.setBackground(Color.cyan);
+        fearButton.setBackground(Color.magenta);
+        disgustButton.setBackground(Color.green);
+    }
     
     /**
      * This method adds listeners to all of the toggle switches and performs the
