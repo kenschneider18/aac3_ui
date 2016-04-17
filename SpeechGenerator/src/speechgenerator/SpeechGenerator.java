@@ -26,6 +26,7 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 import backend.CreateSpeech;
+import java.awt.Font;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -299,6 +300,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private Style joyHighlight;
     private Style black;
     
+    private Style enlarged;
+    
     /**
      * This method takes the globally defined document style variables
      * and intializes the styles. The fucntion will be called by main
@@ -307,13 +310,30 @@ public class SpeechGenerator extends javax.swing.JFrame {
     private void initStyles() {
         document = textPane.getStyledDocument();
         
-        invisible = textPane.getStyledDocument().addStyle("invisible", regular);
+        /*invisible = textPane.getStyledDocument().addStyle("invisible", regular);
         angryHighlight = document.addStyle("angryHighlight", regular);
         disgustHighlight = document.addStyle("disgustHighlight", regular);
         sadHighlight = document.addStyle("sadHighlight", regular);
         fearHighlight = document.addStyle("fearHighlight", regular);
         joyHighlight = document.addStyle("joyHighlight", regular);
-        black = document.addStyle("black", regular);
+        black = document.addStyle("black", regular);*/
+        enlarged = document.addStyle("enlarged", regular);
+        
+        StyleConstants.setFontSize(enlarged, 20);
+        
+        invisible = textPane.getStyledDocument().addStyle("invisible", regular);
+        angryHighlight = document.addStyle("angryHighlight", enlarged);
+        disgustHighlight = document.addStyle("disgustHighlight", enlarged);
+        sadHighlight = document.addStyle("sadHighlight", enlarged);
+        fearHighlight = document.addStyle("fearHighlight", enlarged);
+        joyHighlight = document.addStyle("joyHighlight", enlarged);
+        black = document.addStyle("black", enlarged);
+        
+        try {
+            document.insertString(document.getLength(), " ", enlarged);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // create invisible style
         StyleConstants.setFontSize(invisible, 0);
@@ -334,6 +354,16 @@ public class SpeechGenerator extends javax.swing.JFrame {
         sadnessButton.setBackground(Color.cyan);
         fearButton.setBackground(Color.magenta);
         disgustButton.setBackground(Color.green);
+        
+        joyButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        angerButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        sadnessButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        fearButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        disgustButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        divideButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        speakButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        outputButton.setFont(new Font("Dialog", Font.PLAIN, 20));
+        chooseFileButton.setFont(new Font("Dialog", Font.PLAIN, 20));
     }
     
     /**
@@ -365,7 +395,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
                         } else {
                             try {
                                 document.insertString(document.getLength(), " </a>", invisible);
-                                document.insertString(document.getLength(), " ", regular);
+                                //document.insertString(document.getLength(), " ", regular);
+                                document.insertString(document.getLength(), " ", enlarged);
                                 disgustButton.setEnabled(true);
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
@@ -404,7 +435,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
                         } else {
                             try {
                                 document.insertString(document.getLength(), " </d>", invisible);
-                                document.insertString(document.getLength(), " ", regular);
+                                //document.insertString(document.getLength(), " ", regular);
+                                document.insertString(document.getLength(), " ", enlarged);
                                 angerButton.setEnabled(true);
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
@@ -444,7 +476,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
                         } else {
                             try {
                                 document.insertString(document.getLength(), " </s>", invisible);
-                                document.insertString(document.getLength(), " ", regular);
+                                //document.insertString(document.getLength(), " ", regular);
+                                document.insertString(document.getLength(), " ", enlarged);
                                 disgustButton.setEnabled(true);
                                 fearButton.setEnabled(true);
                                 joyButton.setEnabled(true);
@@ -483,7 +516,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
                         } else {
                             try {
                                 document.insertString(document.getLength(), " </f>", invisible);
-                                document.insertString(document.getLength(), " ", regular);
+                                //document.insertString(document.getLength(), " ", regular);
+                                document.insertString(document.getLength(), " ", enlarged);
                                 disgustButton.setEnabled(true);
                                 angerButton.setEnabled(true);
                                 joyButton.setEnabled(true);
@@ -522,7 +556,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
                         } else {
                             try {
                                 document.insertString(document.getLength(), " </j>", invisible);
-                                document.insertString(document.getLength(), " ", regular);
+                                //document.insertString(document.getLength(), " ", regular);
+                                document.insertString(document.getLength(), " ", enlarged);
                                 disgustButton.setEnabled(true);
                                 fearButton.setEnabled(true);
                                 angerButton.setEnabled(true);
