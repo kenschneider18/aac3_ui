@@ -6,3 +6,4 @@ SpeechGenerator/thisfile.txt
 SpeechGenerator/*.wav
 SpeechGenerator\\*.wav
 .DS_Store
+/SpeechGenerator/dist/
