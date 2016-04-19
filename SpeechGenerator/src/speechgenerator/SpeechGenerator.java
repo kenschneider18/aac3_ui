@@ -180,6 +180,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
                     Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (LineUnavailableException ex) {
                     Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 i++;
             }
@@ -233,6 +235,8 @@ public class SpeechGenerator extends javax.swing.JFrame {
         } catch (UnsupportedAudioFileException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
         } catch (LineUnavailableException ex) {
+            Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
             Logger.getLogger(SpeechGenerator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_speakButtonActionPerformed
