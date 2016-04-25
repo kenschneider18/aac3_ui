@@ -11,8 +11,11 @@ import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 import com.sun.speech.freetts.audio.AudioPlayer;
 import com.sun.speech.freetts.audio.SingleFileAudioPlayer;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.SequenceInputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
@@ -26,6 +29,8 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import sun.tools.jar.CommandLine;
+
 
 /**
  *
@@ -36,7 +41,7 @@ public class CreateSpeech {
     private static String outputName;
     private static Boolean speak;
     
-    public static void convertText(String text, String name, Boolean speakFlag) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+    public static void convertText(String text, String name, Boolean speakFlag) throws IOException, UnsupportedAudioFileException, LineUnavailableException, InterruptedException{
          text = text+ " <end>";
          speak = speakFlag;
          outputName = name + ".wav";
@@ -45,7 +50,9 @@ public class CreateSpeech {
          String list[] = text.split(" ");        
          for (int i = 0; i < list.length-1; i++){
              if(list[i].equals("<a>") || list[i].equals("<f>") || list[i].equals("<d>") || list[i].equals("<s>") || list[i].equals("<j>")){
-                 emotionList.add(list[i]);
+                 list[i] = list[i].replace(">", "");
+                 emotionList.add(list[i].replace("<", ""));
+                 System.out.println(emotionList);
                  String line = "";
                  for (i = i+1; !list[i].startsWith("</"); i++)
                      line += list[i] + " ";
@@ -63,21 +70,44 @@ public class CreateSpeech {
              }
          }
          
-         ArrayList paths = new ArrayList();
+         ArrayList<String> paths = new ArrayList<>();
          for (int i = 0; i < textList.size(); i++){
             convertSpeech(textList.get(i), emotionList.get(i), "VoicePt"+i);
             paths.add("VoicePt"+i+".wav");
          }
+         for (int i = 0; i < paths.size(); i++){
+               
+                String line;
+                if ("Mac OS X".equals(System.getProperty("os.name"))) {
+                    line = "python ./src/backend/try2.py " + paths.get(i) + " " + emotionList.get(i);
+                } else {
+                    line = "python .\\src\\backend\\try2.py " + paths.get(i) + " " + emotionList.get(i);
+                }
+                
+                System.out.println(line);
+                Runtime r = Runtime.getRuntime();
+                Process p = r.exec(line);
+                BufferedReader ostream;
+                ostream = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                String s;
+                while((s = ostream.readLine()) != null) {
+                    System.out.println(s);
+                }
+                
+                BufferedReader estream;
+                estream = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+                while ((s = estream.readLine()) != null) {
+                    System.out.println(s);
+                }
+                System.out.println("Finished.");
+        }
          
         combineWav(paths);
+        
         if (speak)
-            playSound(outputName);
-
-//         System.gc();
-//        for(int i = 0; i < paths.size(); i++)
-//            Files.delete(FileSystems.getDefault().getPath(paths.get(i).toString()));
-//                   
-//        Files.delete(FileSystems.getDefault().getPath(outputName));
+            for (int i = 0; i < paths.size(); i++) {
+                playSound(paths.get(i));
+            }
     }
    
     private static void convertSpeech(String text, String emotion, String name){
@@ -153,9 +183,7 @@ public class CreateSpeech {
         
         
        
-    }
-
-    
+    }    
     
     private static void playSound(String filename) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
         final int BUFFER_SIZE = 128000;
