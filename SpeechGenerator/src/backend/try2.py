@@ -1,18 +1,8 @@
-import numpy as np
 from scipy.io import wavfile
-from scipy.fftpack import fft, ifft
-from scipy import signal
 import wave, struct
 import sys
 
 import time
-
-def show_info(aname, a):
-    print "Array", aname
-    print "shape:", a.shape
-    print "dtype:", a.dtype
-    print "min, max:", a.min(), a.max()
-    print
 
 # playing with the sound to sound angry= change freqency
 for arg in sys.argv:
