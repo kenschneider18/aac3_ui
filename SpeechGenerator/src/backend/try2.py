@@ -24,6 +24,6 @@ if emotion == 'j':
 	# Trying to change volume to add loving tone
 	rate, data = wavfile.read(wavname)
 
-	wavfile.write(wavname, rate*1.5, data)
+	wavfile.write(wavname, rate*1.2, data)
 
 	print("Conversion Finished.")
